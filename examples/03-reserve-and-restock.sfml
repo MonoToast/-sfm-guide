@@ -1,0 +1,7 @@
+NAME "Keep coal in every generator"
+
+-- Configure generator item-input faces if unsided access is unavailable.
+EVERY 20 TICKS DO
+    INPUT RETAIN 64 minecraft:coal FROM coal_stock
+    OUTPUT RETAIN 16 minecraft:coal TO EACH generators
+END

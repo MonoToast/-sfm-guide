@@ -1,0 +1,6 @@
+NAME "Only empty destination slots"
+
+EVERY 20 TICKS DO
+    INPUT FROM drops
+    OUTPUT TO EMPTY SLOTS IN storage
+END

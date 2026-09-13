@@ -1,0 +1,15 @@
+NAME "Raw iron furnace line"
+
+-- For vanilla furnaces; all furnaces share the label furnaces.
+EVERY 20 TICKS DO
+    INPUT minecraft:raw_iron FROM ores
+    OUTPUT RETAIN 8 minecraft:raw_iron TO EACH furnaces TOP SIDE
+    FORGET
+
+    INPUT minecraft:coal FROM fuel
+    OUTPUT RETAIN 8 minecraft:coal TO EACH furnaces BOTTOM SIDE
+    FORGET
+
+    INPUT minecraft:iron_ingot FROM furnaces BOTTOM SIDE
+    OUTPUT TO finished
+END

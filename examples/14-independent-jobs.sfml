@@ -1,0 +1,10 @@
+NAME "Two independent routes"
+
+EVERY 20 TICKS DO
+    INPUT FROM mined_items
+    OUTPUT TO ore_storage
+    FORGET
+
+    INPUT FROM harvested_crops
+    OUTPUT TO food_storage
+END

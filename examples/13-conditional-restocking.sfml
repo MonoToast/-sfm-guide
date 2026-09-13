@@ -1,0 +1,13 @@
+NAME "Keep supplies within a chosen range"
+
+EVERY 20 TICKS DO
+    IF supplies HAS LT 32 minecraft:iron_ingot THEN
+        INPUT minecraft:iron_ingot FROM warehouse
+        OUTPUT RETAIN 64 minecraft:iron_ingot TO supplies
+    ELSE IF supplies HAS GT 128 minecraft:iron_ingot THEN
+        INPUT RETAIN 128 minecraft:iron_ingot FROM supplies
+        OUTPUT TO warehouse
+    ELSE
+        -- No work needed in this range.
+    END
+END

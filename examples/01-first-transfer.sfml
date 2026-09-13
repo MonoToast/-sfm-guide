@@ -1,0 +1,6 @@
+NAME "My first transfer"
+
+EVERY 20 TICKS DO
+    INPUT FROM source
+    OUTPUT TO destination
+END

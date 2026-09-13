@@ -1,0 +1,7 @@
+NAME "Workshop first, warehouse second"
+
+EVERY 20 TICKS DO
+    INPUT minecraft:iron_ingot FROM incoming
+    OUTPUT RETAIN 64 minecraft:iron_ingot TO workshop
+    OUTPUT minecraft:iron_ingot TO warehouse
+END

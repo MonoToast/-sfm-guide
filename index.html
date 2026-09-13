@@ -1,0 +1,1420 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="SFML programming manual for Super Factory Manager 4.34. Keywords, examples, resource routing, and troubleshooting."><title>Super Factory Manager · SFML programming guide</title><style>
+:root{color-scheme:light;--bg:#f7f8fa;--paper:#fff;--ink:#1c2938;--muted:#546579;--line:#dce3eb;--accent:#146954;--soft:#e8f4ef;--code:#142332;--codetext:#edf4fa;--side:285px}
+:root.dark{color-scheme:dark;--bg:#111b24;--paper:#16232e;--ink:#e8eef5;--muted:#adbed0;--line:#344555;--accent:#80d5b4;--soft:#203a36;--code:#0b141d;--codetext:#e7f3ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:22px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.72 system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--accent);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:7px;padding:6px 11px;background:var(--paper);color:var(--ink)}button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}
+aside{position:fixed;inset:0 auto 0 0;width:var(--side);padding:25px 20px 20px;background:var(--paper);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:16px}.brand{display:flex;gap:12px;align-items:center;color:var(--ink);text-decoration:none;font-weight:750;line-height:1.3}.logo{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;background:var(--accent);color:var(--paper);border-radius:10px;font-size:13px;letter-spacing:.4px}.version{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:4px}.searchbox label{display:block;font-size:12px;font-weight:700;margin-bottom:5px}.searchbox input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);font-size:14px}.searchhint{font-size:11px;color:var(--muted);margin-top:5px}nav{overflow:auto;flex:1}nav a{display:block;font-size:13px;line-height:1.45;padding:7px 9px;border-radius:6px;color:var(--muted);text-decoration:none}nav a:hover,nav a.active{color:var(--accent);background:var(--soft)}.tools{display:flex;gap:7px;flex-wrap:wrap}.tools button,.tools a{font-size:12px}.download{font-size:12px;color:var(--muted);margin:0}.download a{margin-right:10px}
+main{margin-left:var(--side);padding:40px clamp(22px,4vw,70px) 70px;max-width:1450px}.eyebrow{font-size:12px;font-weight:750;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin:0 0 9px}.status{background:var(--soft);border:1px solid var(--line);padding:12px 17px;border-radius:9px;margin:0 0 22px;font-size:14px;display:flex;align-items:center;gap:14px;justify-content:space-between}h1{font-size:clamp(30px,3.2vw,45px);line-height:1.14;letter-spacing:-1.5px;margin:0 0 17px;max-width:800px}h2{font-size:26px;line-height:1.3;letter-spacing:-.5px;margin:0 0 23px;padding-bottom:13px;border-bottom:1px solid var(--line)}h3{font-size:19px;line-height:1.4;margin:30px 0 12px}p{margin:0 0 17px}li{margin:5px 0}strong{font-weight:700}.intro{max-width:930px;margin-bottom:34px}.intro>p:first-of-type{color:var(--muted)}.chapter{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px 30px;margin:25px 0;min-width:0;box-shadow:0 2px 6px #00000003}.chapter>*:last-child{margin-bottom:0}.chapter:target{border-color:var(--accent)}
+code{font:13px/1.55 Consolas,'Cascadia Code',ui-monospace,monospace;background:var(--soft);color:var(--ink);padding:2px 4px;border-radius:4px;overflow-wrap:anywhere}pre{position:relative;background:var(--code);color:var(--codetext);border-radius:9px;margin:20px 0;padding:43px 19px 19px;overflow:auto;tab-size:4}pre code{font-size:13px;background:none;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}.copy{position:absolute;right:10px;top:9px;font-size:11px;line-height:1.2;background:#ffffff12;color:#d7e8f5;border:1px solid #ffffff30;padding:5px 9px}.copy:hover{background:#ffffff25}.codekind{position:absolute;top:11px;left:18px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9eb4c8}.kw{color:#82d9b9;font-weight:600}.num{color:#f4c475}.comment{color:#9fb1c4}.str{color:#b6cef5}.table-scroll{overflow-x:auto;margin:19px 0}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.55}th{text-align:left;background:var(--soft);font-size:12px;font-weight:750}td,th{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}td:first-child{min-width:145px}td code,th code{font-size:12px}tr:last-child td{border-bottom:0}blockquote{border-left:3px solid var(--accent);margin:20px 0;padding:8px 18px;background:var(--soft)}footer{font-size:12px;color:var(--muted);margin-top:30px}.mobile-toggle{display:none}.lab{border:1px solid var(--line);border-radius:9px;background:var(--soft);padding:18px;margin:20px 0}.lab h3{margin-top:0}.lab-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.lab label{font-size:12px;display:block;font-weight:650}.lab input{width:100%;padding:7px;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);margin-top:5px}.lab output{font-size:18px;display:block;margin-top:13px;font-weight:700}.lab p{font-size:13px;margin-top:8px}.lab code{font-size:12px}
+@media(min-width:1500px){main{margin-right:auto}}@media(max-width:1050px){:root{--side:245px}aside{padding:20px 13px}.chapter{padding:23px 21px}.lab-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:740px){aside{position:relative;width:100%;height:auto;border-right:0;border-bottom:1px solid var(--line);gap:12px;padding:18px}nav{max-height:240px;display:none}aside.open nav{display:block}.mobile-toggle{display:block}.tools{align-items:center}main{margin:0;padding:24px 13px 45px}.chapter{padding:21px 16px;border-radius:8px}h1{font-size:32px}h2{font-size:23px}body{font-size:15px}.brand{font-size:16px}.searchhint{display:none}.download{display:none}pre code{font-size:12px}}
+@media print{:root{color-scheme:light;--paper:#fff;--bg:#fff;--ink:#000;--muted:#333;--line:#ccc;--soft:#f1f1f1;--accent:#155d4d}aside,.eyebrow,.status,.copy,.lab,footer button{display:none!important}main{margin:0;padding:0;max-width:none}.chapter{display:block!important;border:0;border-radius:0;box-shadow:none;padding:0;margin:30px 0;break-before:auto}h2,h3{break-after:avoid}pre{white-space:pre-wrap;break-inside:avoid;padding:16px;background:#f5f5f5;color:#111;border:1px solid #ddd}pre code{white-space:pre-wrap;color:#111;font-size:10px}.codekind{display:none}.kw,.num,.str,.comment{color:#111}table{font-size:10px}td,th{padding:6px}tr{break-inside:avoid}.table-scroll{overflow:visible}a{color:#155d4d;text-decoration:none}h1{font-size:30px}h2{font-size:23px}body{font-size:11px}.intro{max-width:none}}
+</style></head><body><aside aria-label="Documentation navigation"><a class="brand" href="#"><span class="logo" aria-hidden="true">SFML</span><span>Super Factory Manager<span class="version">Programming guide · SFM 4.34</span></span></a><div class="searchbox"><label for="search">Find a keyword or topic</label><input id="search" type="search" placeholder="Try RETAIN, slots, Mekanism…" autocomplete="off"><div class="searchhint">Press / to search · Esc to clear</div></div><button class="mobile-toggle" id="navtoggle" aria-expanded="false" aria-controls="toc">Contents</button><nav id="toc" aria-label="Chapters"><a href="#1-your-first-program">1. Your first program</a><a href="#2-how-execution-works">2. How execution works</a><a href="#3-writing-syntax-correctly">3. Writing syntax correctly</a><a href="#4-trigger-timing">4. Trigger timing</a><a href="#5-resource-ids-types-and-units">5. Resource IDs, types, and units</a><a href="#6-input-and-output">6. INPUT and OUTPUT</a><a href="#7-amounts-retain-and-each">7. Amounts, RETAIN, and EACH</a><a href="#8-forget-and-independent-jobs">8. FORGET and independent jobs</a><a href="#9-filtering-wildcards-and-tags">9. Filtering, wildcards, and tags</a><a href="#10-if-else-and-inventory-conditions">10. IF, ELSE, and inventory conditions</a><a href="#11-machine-sides-and-slots">11. Machine sides and slots</a><a href="#12-round-robin-and-distribution">12. Round robin and distribution</a><a href="#13-redstone-triggers-and-remote-signals">13. Redstone triggers and remote signals</a><a href="#14-empty-slots">14. Empty slots</a><a href="#15-keyword-reference">15. Keyword reference</a><a href="#16-ready-to-edit-examples">16. Ready-to-edit examples</a><a href="#17-working-with-other-mods">17. Working with other mods</a><a href="#18-troubleshooting">18. Troubleshooting</a><a href="#19-quick-reference">19. Quick reference</a><a href="#20-sources-and-validation">20. Sources and validation</a></nav><div class="tools"><button id="theme">Dark theme</button><button id="print">Print / PDF</button></div><p class="download"><a href="GUIDE.md" download>Markdown</a><a href="Super-Factory-Manager-Guide.pdf" download>PDF</a><a href="examples.zip" download>Examples</a></p></aside><main><p class="eyebrow">Super Factory Manager 4.34 · Automation reference</p><div class="status" id="status" hidden><span id="result" role="status" aria-live="polite"></span><button id="clear">Clear search</button></div><div class="intro"><h1 id="super-factory-manager-programming-guide">Super Factory Manager programming guide</h1>
+<p><strong>SFML reference and practical handbook · Super Factory Manager 4.34</strong></p>
+<blockquote>
+<p><strong>AI disclosure:</strong> This guide was generated by AI using SFM 4.34 source code and official examples. It is an independent guide, not official SFM documentation. See <a href="VALIDATION.md">validation details</a> for the checks performed and their limits.</p>
+</blockquote>
+<p>SFML is the language you write on a Super Factory Manager disk to move items, fluids, energy, and supported chemicals between labelled blocks. This guide teaches SFML in SFM 4.34, with a complete keyword reference, original examples, and explanations of how transfer rules work. It is independent of any particular modpack.</p>
+<p>Start with <strong>Your first program</strong>, then <strong>How execution works</strong> and <strong>Amounts, RETAIN, and EACH</strong>. Use the <strong>Keyword reference</strong> when reading somebody else's script. The separate <code>examples</code> folder contains ready-to-edit programs. The HTML edition has search, navigation, copy buttons, and a print layout.</p>
+<p><strong>Version scope:</strong> examples and language behavior are checked against SFM <strong>4.34.0 for Minecraft 1.21.1 / NeoForge</strong>, source tag <code>4.34.0-1.21.1</code>, commit <code>f5366c79c823ff52712130e69dd9c8166c70bd14</code>. Resource integrations can differ between Minecraft ports; port-specific details are identified where relevant. Syntax checks use that release's lexer and parser and do not establish live-machine behavior. The project's development branch may contain newer features. The language is defined by the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/antlr/sfml/SFML.g4">release grammar</a>.</p>
+</div><section class="chapter" data-title="1. Your first program"><h2 id="1-your-first-program">1. Your first program</h2>
+<h3 id="build-a-small-test-network">Build a small test network</h3>
+<p>You need a <strong>Factory Manager</strong>, <strong>Program Disk</strong>, <strong>Label Gun</strong>, Inventory Cables, and two chests. Use a recipe viewer such as JEI to check the crafting recipes in the current installation.</p>
+<ol>
+<li>Place the Factory Manager and connect both chests to its cable network.</li>
+<li>Put a few inexpensive items in the first chest. Leave room in the second.</li>
+<li>Open the Label Gun's interface and create/select <code>source</code>. Apply it to the first chest. Create/select <code>destination</code> and apply it to the second.</li>
+<li><strong>Push the Label Gun's labels to the Factory Manager.</strong> Labels stored only on the gun are not enough. Follow the gun's displayed push/pull controls; pulling reads an existing manager's assignments, while pushing writes assignments to it.</li>
+<li>Open the Program Disk's editor, paste the program below, save it, and put the disk in the manager. A disk can also be edited while held in your hand.</li>
+<li>Check the manager's compilation/problems display and running state. At normal server speed, items should begin arriving within about a second.</li>
+</ol>
+<pre><code class="language-sfml">NAME &quot;My first transfer&quot;
+
+EVERY 20 TICKS DO
+    INPUT FROM source
+    OUTPUT TO destination
+END
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NAME &quot;My first transfer&quot;</code></td>
+<td>Optional human-readable program title.</td>
+</tr>
+<tr>
+<td><code>EVERY 20 TICKS DO</code></td>
+<td>Start a trigger that runs every 20 game ticks.</td>
+</tr>
+<tr>
+<td><code>INPUT FROM source</code></td>
+<td>Make items in the blocks labelled <code>source</code> available to later output statements.</td>
+</tr>
+<tr>
+<td><code>OUTPUT TO destination</code></td>
+<td>Transfer eligible items into blocks labelled <code>destination</code>.</td>
+</tr>
+<tr>
+<td><code>END</code></td>
+<td>Close the trigger.</td>
+</tr>
+</tbody>
+</table>
+<p>A missing resource filter defaults to <strong>items</strong>, so this program does not also move fluids or FE. Labels are names you assign; <code>source</code> and <code>destination</code> have no special built-in meaning. The official <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/a_simple_program.sfml">basic example</a> uses the same input/output model.</p>
+<h3 id="if-nothing-happens">If nothing happens</h3>
+<p>Check the labels <strong>in the manager</strong>, cable connectivity, whether both chunks are loaded, destination space, and the problems panel. For an ordinary chest, start without a side or slot filter. Add filters only after this simple transfer works.</p>
+</section><section class="chapter" data-title="2. How execution works"><h2 id="2-how-execution-works">2. How execution works</h2>
+<p>SFML is a small automation language with scheduled triggers. It does not provide ordinary variables, functions, arithmetic expressions, <code>for</code> loops, or <code>while</code> loops in this release.</p>
+<p>When a trigger runs, its statements execute in order:</p>
+<pre><code class="language-text">Trigger becomes due
+        ↓
+INPUT registers eligible source slots and limits
+        ↓
+OUTPUT matches sources with destinations and transfers resources
+        ↓
+Later OUTPUT statements can use the remaining active inputs
+        ↓
+FORGET clears selected inputs, or the trigger finishes
+</code></pre>
+<p><strong>INPUT is not a physical buffer.</strong> Merely inputting from a chest does not remove its contents. Transfers happen when an output can accept them. Resources that cannot be inserted normally stay in their source, subject to the participating mods implementing their inventory interfaces correctly.</p>
+<p><strong>An INPUT remains active for later OUTPUT statements in that trigger.</strong> Its transfer allowance is shared across those outputs. New input statements add more sources; they do not replace old inputs. Use <code>FORGET</code> between unrelated jobs.</p>
+<p><strong>Each trigger runs with a fresh execution context.</strong> Inputs do not carry over to the next trigger or timer run. World changes do persist: after an output inserts items, a later condition can see the new inventory state. Separate machines can consume or create items between runs.</p>
+<p>These execution details follow <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/InputStatement.java">InputStatement</a>, <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/OutputStatement.java">OutputStatement</a>, and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/Program.java">Program</a>.</p>
+<h3 id="priority-comes-from-separate-output-statements">Priority comes from separate output statements</h3>
+<pre><code class="language-sfml">NAME &quot;Keep supplies before storing overflow&quot;
+
+EVERY 20 TICKS DO
+    INPUT minecraft:iron_ingot FROM incoming
+    OUTPUT RETAIN 64 minecraft:iron_ingot TO workshop
+    OUTPUT minecraft:iron_ingot TO warehouse
+END
+</code></pre>
+<p>First, top up <code>workshop</code> to 64 matching ingots. Then send what is still available to <code>warehouse</code>. A combined destination list is not a substitute for an explicit priority policy; internal block ordering is not a stable layout contract.</p>
+</section><section class="chapter" data-title="3. Writing syntax correctly"><h2 id="3-writing-syntax-correctly">3. Writing syntax correctly</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keywords</td>
+<td>Case-insensitive: <code>INPUT</code>, <code>input</code>, and <code>Input</code> are equivalent.</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>Use exact spelling and case. <code>ore_bin</code> and <code>Ore_Bin</code> are different names.</td>
+</tr>
+<tr>
+<td>Resource IDs</td>
+<td>Use the actual registry IDs, normally lowercase, such as <code>minecraft:iron_ingot</code>.</td>
+</tr>
+<tr>
+<td>Comments</td>
+<td><code>--</code> starts a comment through the end of the line. <code>#</code> introduces a tag, not a comment.</td>
+</tr>
+<tr>
+<td>Whitespace</td>
+<td>Spaces, tabs, and line breaks separate tokens. Indentation is for people.</td>
+</tr>
+<tr>
+<td>Statements</td>
+<td>No semicolons. No braces. Keywords mark statement boundaries.</td>
+</tr>
+<tr>
+<td>Numbers</td>
+<td>Nonnegative whole decimal numbers: <code>64</code>, <code>1000</code>, <code>100000</code>. No <code>1k</code>, decimal fractions, negative quantities, or <code>64*9</code>.</td>
+</tr>
+<tr>
+<td>Strings</td>
+<td>Double quotes: <code>&quot;fuel storage&quot;</code>. They allow spaces or otherwise awkward names.</td>
+</tr>
+<tr>
+<td>Commas</td>
+<td>Separate labels, resource-limit entries, sides, and slot selections in their respective positions.</td>
+</tr>
+<tr>
+<td>Blocks</td>
+<td><code>EVERY … DO … END</code> and <code>IF … THEN … END</code>. Every nested block needs its own <code>END</code>.</td>
+</tr>
+<tr>
+<td>Reserved words</td>
+<td>Quote a label that conflicts with a keyword, e.g. <code>&quot;input&quot;</code>.</td>
+</tr>
+<tr>
+<td>Label length</td>
+<td>Maximum 256 characters in this release.</td>
+</tr>
+</tbody>
+</table>
+<p>Prefer plain lowercase labels with underscores: <code>ore_input</code>, <code>fuel</code>, <code>smelters</code>, <code>finished</code>. Asterisks in a resource filter are patterns; do not assume they expand label names. Assign the same label to several blocks to form a group. A block can have several labels, but overlapping groups can make routing and counting harder to reason about. These rules come from the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/antlr/sfml/SFML.g4">grammar</a>, <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/label/LabelPositionHolder.java">label lookup</a>, and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/ASTBuilder.java">AST builder</a>.</p>
+<h3 id="two-equivalent-statement-orders">Two equivalent statement orders</h3>
+<pre><code class="language-sfml">EVERY 20 TICKS DO
+    INPUT 16 minecraft:cobblestone FROM source
+    OUTPUT TO destination
+END
+</code></pre>
+<p>The language also accepts <code>FROM source INPUT 16 minecraft:cobblestone</code> and <code>TO destination OUTPUT</code>. This guide uses the first style consistently.</p>
+</section><section class="chapter" data-title="4. Trigger timing"><h2 id="4-trigger-timing">4. Trigger timing</h2>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EVERY 20 TICKS DO</code></td>
+<td>Run once every 20 game ticks.</td>
+</tr>
+<tr>
+<td><code>EVERY 1 SECOND DO</code></td>
+<td>Same interval as 20 ticks.</td>
+</tr>
+<tr>
+<td><code>EVERY 5 SECONDS DO</code></td>
+<td>Run every 100 ticks.</td>
+</tr>
+<tr>
+<td><code>EVERY 20 GLOBAL TICKS DO</code></td>
+<td>Use the world's game-time clock instead of the manager's local clock.</td>
+</tr>
+<tr>
+<td><code>EVERY 20 GLOBAL PLUS 5 TICKS DO</code></td>
+<td>Run when world game time modulo 20 equals 5.</td>
+</tr>
+<tr>
+<td><code>EVERY 20G+5 TICKS DO</code></td>
+<td>Compact form of the preceding example.</td>
+</tr>
+<tr>
+<td><code>EVERY REDSTONE PULSE DO</code></td>
+<td>Run for redstone pulses received by the manager.</td>
+</tr>
+</tbody>
+</table>
+<p><code>TICK</code>/<code>TICKS</code> and <code>SECOND</code>/<code>SECONDS</code> are aliases. <code>G</code> abbreviates <code>GLOBAL</code>; <code>+</code> abbreviates <code>PLUS</code>. An omitted interval number is 1, so <code>EVERY SECOND</code> is valid. Prefer writing numbers explicitly.</p>
+<p><strong>PLUS is a phase offset, not addition to the repeat interval.</strong> <code>EVERY 20 PLUS 5 TICKS</code> still repeats every 20 ticks. Use an offset from 0 through interval minus 1. With <code>SECONDS</code>, both interval and offset are converted to ticks: <code>EVERY 5 PLUS 1 SECONDS</code> repeats every 100 ticks at offset 20. An out-of-range offset can make a trigger never run.</p>
+<p>A local clock is tied to the manager and can be reinitialized after unloading. <code>GLOBAL</code> is useful for coordinating managers, but it does not make separately loaded managers atomic or guarantee execution order between them. At the normal 20 TPS, 20 ticks is one second of real time; a lagging server stretches that real-time interval.</p>
+<p>The shipped defaults allow a minimum <strong>20-tick interval for general transfers</strong> and <strong>1 tick for triggers whose resource I/O is exclusively Forge Energy</strong>. Server configuration can change these limits. Put FE in its own trigger if you need per-tick power delivery. Timing and defaults are documented in the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/timer_triggers.sfml">timer example</a>, <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/Interval.java">Interval implementation</a>, and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/config/SFMServerConfig.java">server configuration</a>.</p>
+<pre><code class="language-sfml">NAME &quot;Separate item and energy schedules&quot;
+
+EVERY 20 TICKS DO
+    INPUT minecraft:coal FROM fuel
+    OUTPUT RETAIN 8 minecraft:coal TO EACH machines
+END
+
+EVERY TICK DO
+    INPUT fe:: FROM battery
+    OUTPUT fe:: TO machines
+END
+</code></pre>
+<p>The generic <code>machines</code> label in this example must expose a suitable coal item input and FE input. Adjust sides to the actual machines.</p>
+</section><section class="chapter" data-title="5. Resource IDs, types, and units"><h2 id="5-resource-ids-types-and-units">5. Resource IDs, types, and units</h2>
+<p>A resource filter can specify both <strong>what kind of resource</strong> and <strong>which registry entry</strong> it matches.</p>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>minecraft:iron_ingot</code></td>
+<td>Exactly that item ID.</td>
+</tr>
+<tr>
+<td><code>iron_ingot</code></td>
+<td>Items named <code>iron_ingot</code> in any namespace.</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>All items.</td>
+</tr>
+<tr>
+<td><code>mekanism:*</code></td>
+<td>All items in the Mekanism namespace.</td>
+</tr>
+<tr>
+<td><code>*ingot*</code></td>
+<td>Items whose registry path contains <code>ingot</code>.</td>
+</tr>
+<tr>
+<td><code>item::</code></td>
+<td>All items, explicitly stating the type.</td>
+</tr>
+<tr>
+<td><code>fluid::</code></td>
+<td>All fluids.</td>
+</tr>
+<tr>
+<td><code>fluid::water</code></td>
+<td>Fluids named <code>water</code> in any namespace.</td>
+</tr>
+<tr>
+<td><code>fluid:minecraft:water</code></td>
+<td>Exactly Minecraft water.</td>
+</tr>
+<tr>
+<td><code>fe::</code></td>
+<td>Forge Energy.</td>
+</tr>
+<tr>
+<td><code>chemical::</code></td>
+<td>Mekanism chemicals, when its integration is present.</td>
+</tr>
+<tr>
+<td><code>chemical:mekanism:oxygen</code></td>
+<td>Exactly the Mekanism oxygen chemical.</td>
+</tr>
+<tr>
+<td><code>sfm:item:minecraft:iron_ingot</code></td>
+<td>Fully qualified item filter.</td>
+</tr>
+<tr>
+<td><code>sfm:fluid:minecraft:water</code></td>
+<td>Fully qualified fluid filter.</td>
+</tr>
+</tbody>
+</table>
+<p>The full layout is:</p>
+<pre><code class="language-text">resource_type_namespace : resource_type_name : resource_namespace : resource_path
+sfm                    : fluid              : minecraft          : water
+</code></pre>
+<p>One-part filters default to the <code>sfm:item</code> type and any resource namespace. Two-part filters are ordinary <code>namespace:path</code> item IDs. Three-part filters use SFM's type namespace, as in <code>fluid:minecraft:water</code>. Four parts specify everything. Empty namespace/path positions act as wildcards in the parsed filter.</p>
+<p><strong><code>fluid::water</code> has two colons for a reason.</strong> <code>fluid:water</code> is a two-part <em>item</em> ID, not the same fluid selector. These expansions follow the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/resource_types.sfml">resource example</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/ResourceIdentifier.java">ResourceIdentifier</a>.</p>
+<h3 id="what-the-quantities-count">What the quantities count</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Numeric unit</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Items</td>
+<td>Individual items, not stacks</td>
+<td><code>64 minecraft:cobblestone</code> is 64 cobblestone.</td>
+</tr>
+<tr>
+<td>Fluids</td>
+<td>Millibuckets (mB) for these Forge/NeoForge handlers</td>
+<td><code>1000 fluid:minecraft:water</code> is one bucket.</td>
+</tr>
+<tr>
+<td>Forge Energy</td>
+<td>FE</td>
+<td><code>100000 fe::</code> is a transfer allowance of 100,000 FE for that statement execution.</td>
+</tr>
+<tr>
+<td>Mekanism chemicals</td>
+<td>Amount reported by the chemical handler</td>
+<td>Use the machine's chemical display/inspection to choose an amount.</td>
+</tr>
+<tr>
+<td>Redstone resource</td>
+<td>Signal strength</td>
+<td><code>HAS</code> can inspect a remote signal; see Redstone below.</td>
+</tr>
+</tbody>
+</table>
+<p>An amount in a program is not automatically a per-second rate. Moving at most 100,000 FE every tick has a different possible throughput from moving it every 20 ticks. Source extraction, destination insertion, capacity, and availability still constrain transfers.</p>
+<p><code>fe::</code>, <code>rf::</code>, <code>energy::</code>, <code>power::</code>, and <code>forge_energy::</code> resolve to Forge Energy in this release. In the Minecraft 1.21.1 integration, <code>chemical::</code> is preferred; <code>gas::</code>, <code>infusion::</code>, <code>pigment::</code>, and <code>slurry::</code> are registered compatibility names backed by the unified chemical handler. Do not assume these names prove a substance is a fluid. The integration is defined in <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/compat/SFMMekanismCompat.java">SFMMekanismCompat</a>.</p>
+<p>Create rotation, Botania mana, Ars Nouveau source, and arbitrary mod-specific data are not automatically transferable just because SFM can connect to the block. The <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/registry/registration/SFMResourceTypes.java">resource registry</a> identifies implemented types; a compatible exposed handler is also necessary.</p>
+</section><section class="chapter" data-title="6. INPUT and OUTPUT"><h2 id="6-input-and-output">6. INPUT and OUTPUT</h2>
+<p>Think of the statement shape as:</p>
+<pre><code class="language-text">INPUT  [resource limits] [EXCEPT resource IDs] FROM [EACH] labels [round robin] [sides] [slots]
+OUTPUT [resource limits] [EXCEPT resource IDs] TO [EMPTY SLOTS IN] [EACH] labels [round robin] [sides] [slots]
+</code></pre>
+<p>Square brackets here mean optional documentation placeholders. Do not type them into SFML.</p>
+<h3 id="select-only-what-the-next-operation-needs">Select only what the next operation needs</h3>
+<pre><code class="language-sfml">NAME &quot;Ore delivery&quot;
+
+EVERY 20 TICKS DO
+    INPUT 32 minecraft:raw_iron FROM ore_input
+    OUTPUT minecraft:raw_iron TO crusher
+END
+</code></pre>
+<p>This permits up to 32 raw iron to move during this trigger execution. It does not manufacture a batch of 32 or require all 32 to be present. With only 7 available and enough destination room, up to 7 can move.</p>
+<p>An output filter can further narrow an input, but cannot widen it. <code>INPUT minecraft:iron_ingot</code> followed by <code>OUTPUT minecraft:gold_ingot</code> has no eligible gold source.</p>
+<h3 id="multiple-resources-and-shared-versus-separate-limits">Multiple resources and shared versus separate limits</h3>
+<pre><code class="language-sfml">NAME &quot;Mixed delivery&quot;
+
+EVERY 20 TICKS DO
+    INPUT
+        16 minecraft:iron_ingot,
+        8 minecraft:gold_ingot,
+    FROM stock
+    OUTPUT TO assembly_supply
+END
+</code></pre>
+<p>Each comma-separated entry has its own limit. A trailing comma is accepted. By contrast, <code>16 minecraft:iron_ingot OR minecraft:gold_ingot</code> gives the matching alternatives a <strong>shared allowance of 16</strong>, unless resource-level <code>EACH</code> expands it.</p>
+<p>Keep resource groups disjoint when you want exact predictable budgets. Overlapping patterns create separate matching rules, rather than automatically becoming one deduplicated policy. See the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/filtering.sfml">filtering example</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/ResourceLimit.java">resource trackers</a>.</p>
+</section><section class="chapter" data-title="7. Amounts, RETAIN, and EACH"><h2 id="7-amounts-retain-and-each">7. Amounts, RETAIN, and EACH</h2>
+<p>These modifiers solve three different questions: how much may move, how much should remain, and whether the rule applies separately to resources or blocks.</p>
+<h3 id="quantity-versus-stock-level">Quantity versus stock level</h3>
+<table>
+<thead>
+<tr>
+<th>Statement fragment</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INPUT 16 iron_ingot FROM stock</code></td>
+<td>Allow up to 16 matching ingots to be extracted during this execution.</td>
+</tr>
+<tr>
+<td><code>INPUT RETAIN 64 iron_ingot FROM stock</code></td>
+<td>Extract only what can be spared while leaving 64 matching ingots in the selected source scope.</td>
+</tr>
+<tr>
+<td><code>INPUT 16 RETAIN 64 iron_ingot FROM stock</code></td>
+<td>Move at most 16 while also preserving that reserve.</td>
+</tr>
+<tr>
+<td><code>OUTPUT 16 iron_ingot TO supply</code></td>
+<td>Insert at most 16 additional matching ingots. Existing stock does not reduce this quantity allowance.</td>
+</tr>
+<tr>
+<td><code>OUTPUT RETAIN 64 iron_ingot TO supply</code></td>
+<td>Top up to a matching stock level of 64. Existing matching stock counts toward it.</td>
+</tr>
+<tr>
+<td><code>OUTPUT 16 RETAIN 64 iron_ingot TO supply</code></td>
+<td>Add at most 16 while stopping at 64 matching stock.</td>
+</tr>
+</tbody>
+</table>
+<p>If a destination holds 50 ingots, <code>OUTPUT 16 RETAIN 64 iron_ingot</code> can add at most <strong>14</strong>. If it already holds 80, this output adds <strong>0</strong>; it does not remove the extra 16. If a source holds 70, <code>INPUT 16 RETAIN 64 iron_ingot</code> makes at most <strong>6</strong> available.</p>
+<p>Retention counts the matching resource/filter in the selected accessible sides and slots. It is not necessarily a count of every compartment visible in the machine's GUI. The behavior comes from the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/program/SharedQuantitySharedRetentionInputResourceTracker.java">input retention tracker</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/program/SharedQuantitySharedRetentionOutputResourceTracker.java">output retention tracker</a>.</p>
+<h3 id="the-four-uses-of-each">The four uses of EACH</h3>
+<table>
+<thead>
+<tr>
+<th>Position</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>16 EACH *ingot*</code></td>
+<td>Separate quantity allowance per matching resource ID.</td>
+</tr>
+<tr>
+<td><code>RETAIN 64 EACH *ingot*</code></td>
+<td>Separate retained-stock target per matching resource ID.</td>
+</tr>
+<tr>
+<td><code>FROM EACH stock</code> / <code>TO EACH machines</code></td>
+<td>Separate limits per selected source/destination block.</td>
+</tr>
+<tr>
+<td><code>IF EACH machines HAS …</code></td>
+<td>Every selected block must satisfy the condition; alias of <code>EVERY</code> in a condition.</td>
+</tr>
+</tbody>
+</table>
+<p><code>EACH SIDE</code> is another fixed phrase: try all exposed side choices. It does not distribute items evenly.</p>
+<h3 id="compare-the-resulting-policy">Compare the resulting policy</h3>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OUTPUT 8 *ingot* TO machines</code></td>
+<td>Up to 8 matching ingots total across the destination scope.</td>
+</tr>
+<tr>
+<td><code>OUTPUT 8 EACH *ingot* TO machines</code></td>
+<td>Up to 8 per matching ingot ID across that scope.</td>
+</tr>
+<tr>
+<td><code>OUTPUT 8 *ingot* TO EACH machines</code></td>
+<td>Up to 8 matching ingots per destination block.</td>
+</tr>
+<tr>
+<td><code>OUTPUT 8 EACH *ingot* TO EACH machines</code></td>
+<td>Up to 8 of each matching ingot ID per destination block.</td>
+</tr>
+<tr>
+<td><code>OUTPUT RETAIN 8 EACH *ingot* TO EACH machines</code></td>
+<td>Top up each destination to 8 of each matching ingot ID.</td>
+</tr>
+</tbody>
+</table>
+<p>Without block-level <code>EACH</code>, limits and retention are shared across the selected group. For example, two fuel chests with 50 coal each and <code>INPUT RETAIN 64 coal FROM fuel</code> preserve a combined reserve of 64; <code>FROM EACH fuel</code> preserves up to 64 in each chest, so neither currently supplies coal.</p>
+<p><code>EACH</code> by resource ID does not mean each item stack, slot, NBT variant, or enchantment combination. These distinctions and the supported combinations are illustrated in the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/limits.sfml">limits example</a>.</p>
+<h3 id="a-practical-machine-supply-rule">A practical machine supply rule</h3>
+<pre><code class="language-sfml">NAME &quot;Keep coal in every generator&quot;
+
+EVERY 20 TICKS DO
+    INPUT RETAIN 64 minecraft:coal FROM coal_stock
+    OUTPUT RETAIN 16 minecraft:coal TO EACH generators
+END
+</code></pre>
+<p>This preserves a shared 64-coal source reserve and tries to keep 16 coal in each generator. Add the actual generator input side if necessary. Retention is a stock target, not a fairness guarantee when supplies are scarce.</p>
+</section><section class="chapter" data-title="8. FORGET and independent jobs"><h2 id="8-forget-and-independent-jobs">8. FORGET and independent jobs</h2>
+<p>Use <code>FORGET</code> to prevent one job's sources from being used by another job.</p>
+<pre><code class="language-sfml">NAME &quot;Two independent routes&quot;
+
+EVERY 20 TICKS DO
+    INPUT FROM mined_items
+    OUTPUT TO ore_storage
+
+    FORGET
+
+    INPUT FROM harvested_crops
+    OUTPUT TO food_storage
+END
+</code></pre>
+<p>Without <code>FORGET</code>, the second output could also draw eligible leftovers from <code>mined_items</code>. That matters even when the first output inserted some items successfully.</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FORGET</code></td>
+<td>Clear all active input labels for the current trigger.</td>
+</tr>
+<tr>
+<td><code>FORGET mined_items</code></td>
+<td>Remove that label from active inputs.</td>
+</tr>
+<tr>
+<td><code>FORGET mined_items, harvested_crops</code></td>
+<td>Remove both named labels from active inputs.</td>
+</tr>
+</tbody>
+</table>
+<p>Forgetting does not erase the labels on the disk, delete blocks, or discard items. It changes the current execution's eligible input sources. An <code>IF</code> block does not provide a private input scope; input statements reached inside it remain available afterward until forgotten or the trigger ends. See <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/forget.sfml">the built-in FORGET example</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/ForgetStatement.java">ForgetStatement</a>.</p>
+</section><section class="chapter" data-title="9. Filtering, wildcards, and tags"><h2 id="9-filtering-wildcards-and-tags">9. Filtering, wildcards, and tags</h2>
+<h3 id="literal-ids-and-wildcard-patterns">Literal IDs and wildcard patterns</h3>
+<p>Use a full ID when you mean one resource: <code>minecraft:copper_ingot</code>. Use <code>*</code> in unquoted patterns for zero or more characters: <code>*_ingot</code>, <code>mekanism:*</code>, <code>*ore*</code>.</p>
+<p>Quoted <strong>resource filters</strong> support Java-style regular expressions, for example <code>&quot;minecraft:(iron|gold)_ingot&quot;</code>. Quoted <strong>labels</strong> are still exact names, not regex patterns. Quote resource paths containing punctuation that the plain identifier grammar cannot accept, such as a slash. Use a literal filter when you do not need a pattern.</p>
+<h3 id="except-applies-to-the-whole-transfer-statement">EXCEPT applies to the whole transfer statement</h3>
+<pre><code class="language-sfml">NAME &quot;Keep valuables out of bulk storage&quot;
+
+EVERY 20 TICKS DO
+    INPUT * EXCEPT minecraft:diamond, minecraft:emerald FROM incoming
+    OUTPUT TO bulk_storage
+END
+</code></pre>
+<p>Every resource-limit entry in that <code>INPUT</code> is subject to the exclusion list. Exclusions are IDs/patterns separated by commas. <code>EXCEPT</code> does not accept a <code>WITH</code> expression. The <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/filtering.sfml">filtering example</a> documents this statement-wide behavior.</p>
+<h3 id="tags-group-related-resources">Tags group related resources</h3>
+<p>Tags are Minecraft's named sets of resources. Exact tag availability depends on installed mods and data packs; check the tag with inspection, a recipe viewer, or the relevant data files before relying on it. For Minecraft 1.21.1, common interoperable item tags often use <code>c:</code>; older examples may use <code>forge:</code>.</p>
+<pre><code class="language-sfml">NAME &quot;Collect tagged ingots&quot;
+
+EVERY 20 TICKS DO
+    INPUT WITH #c:ingots FROM incoming
+    OUTPUT TO ingot_storage
+END
+</code></pre>
+<p>These tag selectors have equivalent spellings:</p>
+<ul>
+<li><code>WITH #c:ingots</code></li>
+<li><code>WITH TAG c:ingots</code></li>
+<li><code>WITH TAG #c:ingots</code></li>
+</ul>
+<p>You can omit the tag namespace to match any namespace: <code>WITH #ingots</code>. A tag's path can have segments: <code>WITH #c:ingots/iron</code>. A pattern such as <code>#c:ingots/*</code> selects child tag paths; <code>**</code> can match multiple remaining path segments. Block tags can also match the items representing those blocks. This behavior is specified by the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/tag_matching.sfml">tag-matching example</a>.</p>
+<h3 id="combine-tag-requirements">Combine tag requirements</h3>
+<pre><code class="language-sfml">NAME &quot;Non-iron ingots&quot;
+
+EVERY 20 TICKS DO
+    INPUT WITH #c:ingots AND NOT #c:ingots/iron FROM incoming
+    OUTPUT TO other_ingots
+END
+</code></pre>
+<p><code>AND</code> requires both conditions; <code>OR</code> requires either; <code>NOT</code> negates one. Parentheses group expressions. <code>WITHOUT</code> negates the <strong>whole</strong> tag expression following it:</p>
+<pre><code class="language-text">WITHOUT #tag_a AND #tag_b
+means: NOT (has tag_a AND has tag_b)
+
+WITH #tag_a AND NOT #tag_b
+means: has tag_a AND does not have tag_b
+</code></pre>
+<p><code>WITH</code> and <code>WITHOUT</code> in this release match tags. They are not a general NBT/data-component query language: there is no supported <code>WITH enchantment = ...</code> or <code>WHERE damage &gt; ...</code> syntax.</p>
+</section><section class="chapter" data-title="10. IF, ELSE, and inventory conditions"><h2 id="10-if-else-and-inventory-conditions">10. IF, ELSE, and inventory conditions</h2>
+<pre><code class="language-sfml">NAME &quot;Conditional restocking&quot;
+
+EVERY 20 TICKS DO
+    IF supplies HAS LT 32 minecraft:iron_ingot THEN
+        INPUT minecraft:iron_ingot FROM warehouse
+        OUTPUT RETAIN 64 minecraft:iron_ingot TO supplies
+    ELSE IF supplies HAS GT 128 minecraft:iron_ingot THEN
+        INPUT RETAIN 128 minecraft:iron_ingot FROM supplies
+        OUTPUT TO warehouse
+    ELSE
+        -- Stock is within the chosen range; no transfer is needed.
+    END
+END
+</code></pre>
+<p>Branches are checked in order; the first true branch runs. An optional <code>ELSE</code> handles the remaining case. <code>ELSE IF</code> is two keywords. Nested <code>IF</code> statements are supported.</p>
+<h3 id="comparison-operators">Comparison operators</h3>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GT</code></td>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>LT</code></td>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>EQ</code></td>
+<td><code>=</code></td>
+<td>Equal to</td>
+</tr>
+<tr>
+<td><code>GE</code></td>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+</tr>
+<tr>
+<td><code>LE</code></td>
+<td><code>&lt;=</code></td>
+<td>Less than or equal to</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>=</code>, not <code>==</code>. There is no <code>!=</code> operator; write <code>NOT (supplies HAS EQ 0 minecraft:coal)</code> or simply use <code>GT 0</code> for a positive count.</p>
+<p>The condition format is:</p>
+<pre><code class="language-text">[OVERALL | SOME | EVERY | EACH | ONE | LONE]
+labels [sides] [slots] HAS comparison number [resource alternatives] [tag filter]
+</code></pre>
+<p>A missing resource filter counts items by default. State the resource type explicitly when counting fluids, energy, or chemicals. A count is taken when the condition is evaluated, so do not treat a condition and a later output as an atomic crafting reservation.</p>
+<h3 id="conditions-on-groups">Conditions on groups</h3>
+<p>Suppose three chests labelled <code>supplies</code> contain 5, 5, and 10 iron ingots.</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Result</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>supplies HAS EQ 20 iron_ingot</code></td>
+<td>True</td>
+<td>Default is an overall sum.</td>
+</tr>
+<tr>
+<td><code>OVERALL supplies HAS EQ 5 iron_ingot</code></td>
+<td>False</td>
+<td>Total is 20.</td>
+</tr>
+<tr>
+<td><code>SOME supplies HAS EQ 5 iron_ingot</code></td>
+<td>True</td>
+<td>At least one chest has exactly 5.</td>
+</tr>
+<tr>
+<td><code>EVERY supplies HAS GE 5 iron_ingot</code></td>
+<td>True</td>
+<td>All three pass.</td>
+</tr>
+<tr>
+<td><code>EACH supplies HAS GE 5 iron_ingot</code></td>
+<td>True</td>
+<td>Same as <code>EVERY</code>.</td>
+</tr>
+<tr>
+<td><code>ONE supplies HAS EQ 5 iron_ingot</code></td>
+<td>False</td>
+<td>Two chests pass, rather than exactly one.</td>
+</tr>
+<tr>
+<td><code>LONE supplies HAS EQ 5 iron_ingot</code></td>
+<td>False</td>
+<td><code>LONE</code> allows zero or one passing chest; two pass.</td>
+</tr>
+</tbody>
+</table>
+<p>With an empty selected group, <code>EVERY</code> and <code>LONE</code> can evaluate true, <code>SOME</code> and <code>ONE</code> are false, and <code>OVERALL</code> compares against zero. Do not use <code>EVERY …</code> alone as proof that a label was assigned correctly. Group behavior is implemented in <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/SetOperator.java">SetOperator</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/BoolHas.java">BoolHas</a>.</p>
+<h3 id="combine-boolean-conditions">Combine boolean conditions</h3>
+<pre><code class="language-sfml">EVERY 20 TICKS DO
+    IF (supplies HAS LT 16 minecraft:coal)
+       AND (warehouse HAS GT 64 minecraft:coal)
+       AND REDSTONE GT 0 THEN
+        INPUT RETAIN 64 minecraft:coal FROM warehouse
+        OUTPUT RETAIN 32 minecraft:coal TO supplies
+    END
+END
+</code></pre>
+<p>Precedence is <code>NOT</code>, then <code>AND</code>, then <code>OR</code>. Parentheses make mixed expressions easier to read. <code>TRUE</code> and <code>FALSE</code> are boolean constants.</p>
+<p><strong>4.34.0 caveat:</strong> the grammar accepts <code>EXCEPT</code> in a <code>HAS</code> condition, but the inspected <code>BoolHas</code> counting implementation does not apply that exclusion field. Treat this as an implementation issue and avoid relying on it. Use explicit resource alternatives or a suitable positive/negative tag filter instead. This caveat is based on <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/BoolHas.java">source inspection</a>, not a live-world reproduction.</p>
+</section><section class="chapter" data-title="11. Machine sides and slots"><h2 id="11-machine-sides-and-slots">11. Machine sides and slots</h2>
+<p>Sides choose a block's exposed resource interface. They do not tell SFM where to lay a cable.</p>
+<pre><code class="language-sfml">NAME &quot;Feed and collect a furnace&quot;
+
+EVERY 20 TICKS DO
+    INPUT minecraft:raw_iron FROM ores
+    OUTPUT RETAIN 8 minecraft:raw_iron TO furnace TOP SIDE
+    FORGET
+
+    INPUT minecraft:coal FROM fuel
+    OUTPUT RETAIN 8 minecraft:coal TO furnace BOTTOM SIDE
+    FORGET
+
+    INPUT minecraft:iron_ingot FROM furnace BOTTOM SIDE
+    OUTPUT TO finished
+END
+</code></pre>
+<p>For a normal furnace, the top is the smelting-item input and the bottom exposes results and fuel handling. Other machines may expose different sides and may require their own side configuration. The <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/furnace_manager.sfml">official furnace example</a> uses top and bottom in this way.</p>
+<table>
+<thead>
+<tr>
+<th>Side syntax</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TOP SIDE</code>, <code>BOTTOM SIDE</code></td>
+<td>World up or down.</td>
+</tr>
+<tr>
+<td><code>NORTH SIDE</code>, <code>EAST SIDE</code>, <code>SOUTH SIDE</code>, <code>WEST SIDE</code></td>
+<td>Absolute world directions.</td>
+</tr>
+<tr>
+<td><code>FRONT SIDE</code>, <code>BACK SIDE</code></td>
+<td>Based on the block's facing property.</td>
+</tr>
+<tr>
+<td><code>LEFT SIDE</code>, <code>RIGHT SIDE</code></td>
+<td>Relative horizontal faces. For a north-facing block, LEFT resolves east and RIGHT west in this implementation.</td>
+</tr>
+<tr>
+<td><code>TOP, WEST SIDE</code></td>
+<td>Consider the listed sides. The word <code>SIDE</code> comes once at the end.</td>
+</tr>
+<tr>
+<td><code>NULL SIDE</code></td>
+<td>Request the unsided interface.</td>
+</tr>
+<tr>
+<td>No side written</td>
+<td>Defaults to <code>NULL SIDE</code>, not all six faces.</td>
+</tr>
+<tr>
+<td><code>EACH SIDE</code></td>
+<td>Try all six directions plus the unsided interface.</td>
+</tr>
+</tbody>
+</table>
+<p>Relative faces depend on the block having a supported facing property; if they cannot be resolved, the implementation falls back to an unsided query. Start with explicit world directions when diagnosing a machine. <code>EACH SIDE</code> is not a bypass of a machine's I/O rules, and broad side access can complicate counting. See <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/Side.java">Side</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/SideQualifier.java">SideQualifier</a>.</p>
+<h3 id="slot-selection">Slot selection</h3>
+<p>Slot indices are <strong>zero-based indices in the exposed handler</strong>. A machine's displayed GUI positions may not use the same numbering.</p>
+<pre><code class="language-sfml">EVERY 20 TICKS DO
+    INPUT FROM cabinet SLOTS 0-8
+    OUTPUT TO sorting_chest SLOTS 9-17
+END
+</code></pre>
+<p><code>SLOT</code> and <code>SLOTS</code> are aliases. Ranges include both endpoints. <code>SLOTS 0, 2, 5-8</code> selects 0, 2, 5, 6, 7, and 8. With both sides and slots, write sides first: <code>furnace BOTTOM SIDE SLOTS 2</code>.</p>
+<p>For fluids/chemicals, the handler's slots correspond to exposed tanks; for other resource types they follow that type's handler. Use SFM's Container Inspector and machine settings to discover the actual indices. Retention applies to this selected view, so filtering to a single slot also limits what stock is counted.</p>
+</section><section class="chapter" data-title="12. Round robin and distribution"><h2 id="12-round-robin-and-distribution">12. Round robin and distribution</h2>
+<p>Round robin chooses a different target each time a statement executes. It does not split a batch evenly by itself.</p>
+<pre><code class="language-sfml">NAME &quot;Take turns supplying stations&quot;
+
+EVERY 20 TICKS DO
+    INPUT minecraft:stone FROM warehouse
+    OUTPUT 16 minecraft:stone TO stations ROUND ROBIN BY BLOCK
+END
+</code></pre>
+<p>With three eligible station blocks, successive executions select one block, then another, then the third, cycling thereafter. The selected block can receive up to 16 stones; a full or incompatible target can prevent useful work for that turn. Do not depend on a particular first block or ordering.</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Selection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ROUND ROBIN BY BLOCK</code></td>
+<td>Select one block across the labelled candidates.</td>
+</tr>
+<tr>
+<td><code>ROUND ROBIN BY LABEL</code></td>
+<td>Select one label from the label list; the blocks assigned to it are candidates.</td>
+</tr>
+</tbody>
+</table>
+<p>Round robin works on inputs too:</p>
+<pre><code class="language-sfml">EVERY 20 TICKS DO
+    INPUT FROM quarry_a, quarry_b ROUND ROBIN BY LABEL
+    OUTPUT TO processing
+END
+</code></pre>
+<p>For keeping several machines stocked, <code>OUTPUT RETAIN 16 … TO EACH machines</code> is usually a clearer policy: it visits the destination group and tops up each matching stock level. Use round robin when taking turns is the actual requirement. Selection behavior is explained in the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/round_robin.sfml">round-robin example</a> and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/RoundRobin.java">implementation</a>.</p>
+</section><section class="chapter" data-title="13. Redstone triggers and remote signals"><h2 id="13-redstone-triggers-and-remote-signals">13. Redstone triggers and remote signals</h2>
+<h3 id="a-pulse-moves-one-batch">A pulse moves one batch</h3>
+<pre><code class="language-sfml">NAME &quot;Button-operated batch&quot;
+
+EVERY REDSTONE PULSE DO
+    INPUT 16 minecraft:cobblestone FROM source
+    OUTPUT TO destination
+END
+</code></pre>
+<p>Attach the button or pulse source so the <strong>manager</strong> receives the signal. A pulse trigger is an event; holding a lever on is not an instruction to repeat this block every tick.</p>
+<h3 id="a-lever-enables-scheduled-work">A lever enables scheduled work</h3>
+<pre><code class="language-sfml">NAME &quot;Lever-enabled transfer&quot;
+
+EVERY 20 TICKS DO
+    IF REDSTONE GT 0 THEN
+        INPUT FROM source
+        OUTPUT TO destination
+    END
+END
+</code></pre>
+<p><code>IF REDSTONE</code> checks the manager's strongest neighboring redstone signal, not an arbitrary label. Use an explicit comparison such as <code>GT 0</code> for powered, <code>EQ 0</code> for unpowered, or <code>GE 8</code> for a threshold.</p>
+<p><strong>4.34.0 caveat:</strong> bare <code>IF REDSTONE THEN</code> is parsed as <code>REDSTONE GE 0</code> by the inspected builder, making it true even at signal zero. Always write the intended comparison. The <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/redstone_signals.sfml">redstone example</a>, <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/ASTBuilder.java">builder</a>, and <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast/BoolRedstone.java">BoolRedstone implementation</a> establish the distinction.</p>
+<h3 id="inspect-a-remote-block-s-signal">Inspect a remote block's signal</h3>
+<pre><code class="language-sfml">EVERY 20 TICKS DO
+    IF control HAS GT 0 redstone:: THEN
+        INPUT FROM source
+        OUTPUT TO destination
+    END
+END
+</code></pre>
+<p>Here <code>control</code> is a labelled block whose exposed redstone handler supplies the reading. Inspect it and choose a side if needed. <code>redstone::</code> is a resource-type selector; ordinary <code>minecraft:redstone</code> is the redstone-dust <strong>item</strong>. The release's redstone resource implementation reports signal values but has no-op extraction/insertion, so do not promise that <code>OUTPUT 15 redstone::</code> will act as a general redstone emitter. See <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/resourcetype/RedstoneResourceType.java">RedstoneResourceType</a>.</p>
+</section><section class="chapter" data-title="14. Empty slots"><h2 id="14-empty-slots">14. Empty slots</h2>
+<pre><code class="language-sfml">NAME &quot;Insert only into empty slots&quot;
+
+EVERY 20 TICKS DO
+    INPUT FROM drops
+    OUTPUT TO EMPTY SLOTS IN storage
+END
+</code></pre>
+<p><code>EMPTY SLOTS IN</code> changes destination selection: occupied slots are skipped, even if an existing stack could accept more items. This can reduce work scanning some large nearly full inventories, but can leave partly filled stacks unmerged. Compare behavior before applying it broadly.</p>
+<p>With multiple destination blocks, the modifier order is <code>TO EMPTY SLOTS IN EACH storage</code>. Slot/side filters still come after the labels. Use ordinary output for normal stacking. The official <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/empty_slots.sfml">empty-slots example</a> also shows a separate infrequent compaction pass.</p>
+</section><section class="chapter" data-title="15. Keyword reference"><h2 id="15-keyword-reference">15. Keyword reference</h2>
+<p>This table covers every word token in the shipped SFML lexer, including aliases and a reserved token that has no usable statement syntax. Examples in the table are fragments unless they show a complete trigger.</p>
+<table>
+<thead>
+<tr>
+<th>Keyword or phrase</th>
+<th>What it does</th>
+<th>Example / note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NAME</code></td>
+<td>Gives the program a title.</td>
+<td><code>NAME &quot;Ore line&quot;</code>; before triggers.</td>
+</tr>
+<tr>
+<td><code>EVERY</code></td>
+<td>Starts a scheduled/pulse trigger; also means all blocks in a <code>HAS</code> condition.</td>
+<td><code>EVERY 20 TICKS DO</code>; <code>IF EVERY furnaces HAS …</code>.</td>
+</tr>
+<tr>
+<td><code>DO</code></td>
+<td>Starts a trigger body.</td>
+<td>Paired with <code>END</code>.</td>
+</tr>
+<tr>
+<td><code>END</code></td>
+<td>Closes a trigger or <code>IF</code> block.</td>
+<td>Nested blocks need separate endings.</td>
+</tr>
+<tr>
+<td><code>TICK</code>, <code>TICKS</code></td>
+<td>Interval unit in game ticks.</td>
+<td><code>EVERY 20 TICKS</code>.</td>
+</tr>
+<tr>
+<td><code>SECOND</code>, <code>SECONDS</code></td>
+<td>Interval unit of 20 game ticks.</td>
+<td><code>EVERY 2 SECONDS</code>.</td>
+</tr>
+<tr>
+<td><code>GLOBAL</code>, <code>G</code></td>
+<td>Uses the world game-time clock.</td>
+<td><code>EVERY 20G TICKS</code>.</td>
+</tr>
+<tr>
+<td><code>PLUS</code>, <code>+</code></td>
+<td>Adds a timer phase offset.</td>
+<td><code>EVERY 20 PLUS 5 TICKS</code>; not general math.</td>
+</tr>
+<tr>
+<td><code>REDSTONE</code></td>
+<td>Pulse source keyword, manager signal condition, or usable identifier in other contexts.</td>
+<td><code>IF REDSTONE GT 0</code>; distinguish dust from <code>redstone::</code>.</td>
+</tr>
+<tr>
+<td><code>PULSE</code></td>
+<td>Selects redstone event triggering.</td>
+<td><code>EVERY REDSTONE PULSE DO</code>.</td>
+</tr>
+<tr>
+<td><code>INPUT</code></td>
+<td>Registers eligible sources and extraction limits.</td>
+<td><code>INPUT 8 coal FROM fuel</code>.</td>
+</tr>
+<tr>
+<td><code>FROM</code></td>
+<td>Introduces source labels.</td>
+<td><code>FROM ore_input</code>.</td>
+</tr>
+<tr>
+<td><code>OUTPUT</code></td>
+<td>Transfers eligible inputs to destinations.</td>
+<td><code>OUTPUT TO finished</code>.</td>
+</tr>
+<tr>
+<td><code>TO</code></td>
+<td>Introduces destination labels.</td>
+<td><code>TO EACH machines</code>.</td>
+</tr>
+<tr>
+<td><code>RETAIN</code></td>
+<td>Source reserve or destination target stock.</td>
+<td><code>INPUT RETAIN 64 …</code>; <code>OUTPUT RETAIN 16 …</code>.</td>
+</tr>
+<tr>
+<td><code>EACH</code></td>
+<td>Separates limits by resource ID or block; all-block condition alias; part of <code>EACH SIDE</code>.</td>
+<td>Meaning depends on its position.</td>
+</tr>
+<tr>
+<td><code>EXCEPT</code></td>
+<td>Excludes resource IDs/patterns from the entire transfer statement.</td>
+<td><code>EXCEPT dirt, gravel</code>; condition caveat in section 10.</td>
+</tr>
+<tr>
+<td><code>FORGET</code></td>
+<td>Clears active input references.</td>
+<td><code>FORGET</code> or <code>FORGET source</code>.</td>
+</tr>
+<tr>
+<td><code>EMPTY</code></td>
+<td>Selects initially empty output slots.</td>
+<td>Used in <code>TO EMPTY SLOTS IN storage</code>.</td>
+</tr>
+<tr>
+<td><code>SLOT</code>, <code>SLOTS</code></td>
+<td>Selects handler indices; also used in the empty-slot phrase.</td>
+<td><code>SLOTS 0, 2-5</code>.</td>
+</tr>
+<tr>
+<td><code>IN</code></td>
+<td>Connects empty-slot selection to destination labels.</td>
+<td><code>EMPTY SLOTS IN storage</code>.</td>
+</tr>
+<tr>
+<td><code>WITH</code></td>
+<td>Requires a tag expression.</td>
+<td><code>WITH #c:ingots</code>.</td>
+</tr>
+<tr>
+<td><code>WITHOUT</code></td>
+<td>Negates the following whole tag expression.</td>
+<td><code>WITHOUT #c:ores</code>.</td>
+</tr>
+<tr>
+<td><code>TAG</code>, <code>#</code></td>
+<td>Introduces a tag matcher.</td>
+<td><code>TAG c:ingots</code>, <code>#c:ingots</code>, or <code>TAG #c:ingots</code>.</td>
+</tr>
+<tr>
+<td><code>IF</code></td>
+<td>Starts conditional execution.</td>
+<td><code>IF stock HAS LT 64 coal THEN</code>.</td>
+</tr>
+<tr>
+<td><code>THEN</code></td>
+<td>Starts the true branch.</td>
+<td>Required after the condition.</td>
+</tr>
+<tr>
+<td><code>ELSE</code></td>
+<td>Fallback branch or part of <code>ELSE IF</code>.</td>
+<td>No <code>THEN</code> directly after plain <code>ELSE</code>.</td>
+</tr>
+<tr>
+<td><code>HAS</code></td>
+<td>Counts matching resources in selected blocks.</td>
+<td><code>stock HAS GE 64 coal</code>.</td>
+</tr>
+<tr>
+<td><code>OVERALL</code></td>
+<td>Compares the aggregate count; default <code>HAS</code> mode.</td>
+<td><code>OVERALL tanks HAS GE 1000 fluid::water</code>.</td>
+</tr>
+<tr>
+<td><code>SOME</code></td>
+<td>At least one selected block must pass.</td>
+<td><code>SOME machines HAS EQ 0 coal</code>.</td>
+</tr>
+<tr>
+<td><code>ONE</code></td>
+<td>Exactly one selected block must pass.</td>
+<td>Different from <code>SOME</code>.</td>
+</tr>
+<tr>
+<td><code>LONE</code></td>
+<td>Zero or one selected block may pass.</td>
+<td>Not the same as <code>ONE</code>.</td>
+</tr>
+<tr>
+<td><code>TRUE</code></td>
+<td>Always-true boolean value.</td>
+<td>Useful while isolating a branch.</td>
+</tr>
+<tr>
+<td><code>FALSE</code></td>
+<td>Always-false boolean value.</td>
+<td>Can temporarily prevent a branch from executing.</td>
+</tr>
+<tr>
+<td><code>NOT</code></td>
+<td>Negates a boolean or tag expression.</td>
+<td><code>NOT (stock HAS EQ 0 coal)</code>.</td>
+</tr>
+<tr>
+<td><code>AND</code></td>
+<td>Requires both boolean/tag expressions.</td>
+<td><code>condition_a AND condition_b</code>.</td>
+</tr>
+<tr>
+<td><code>OR</code></td>
+<td>Either boolean/tag expression; also resource alternatives sharing a limit.</td>
+<td><code>8 coal OR charcoal</code>.</td>
+</tr>
+<tr>
+<td><code>GT</code>, <code>&gt;</code></td>
+<td>Greater than.</td>
+<td><code>HAS GT 16 coal</code>.</td>
+</tr>
+<tr>
+<td><code>LT</code>, <code>&lt;</code></td>
+<td>Less than.</td>
+<td><code>HAS LT 16 coal</code>.</td>
+</tr>
+<tr>
+<td><code>EQ</code>, <code>=</code></td>
+<td>Equal to.</td>
+<td>A single equals sign.</td>
+</tr>
+<tr>
+<td><code>GE</code>, <code>&gt;=</code></td>
+<td>Greater than or equal to.</td>
+<td><code>HAS GE 16 coal</code>.</td>
+</tr>
+<tr>
+<td><code>LE</code>, <code>&lt;=</code></td>
+<td>Less than or equal to.</td>
+<td><code>HAS LE 16 coal</code>.</td>
+</tr>
+<tr>
+<td><code>ROUND</code></td>
+<td>Begins the round-robin selection phrase.</td>
+<td><code>ROUND ROBIN BY BLOCK</code>.</td>
+</tr>
+<tr>
+<td><code>ROBIN</code></td>
+<td>Second word of that phrase.</td>
+<td>Not a standalone statement.</td>
+</tr>
+<tr>
+<td><code>BY</code></td>
+<td>Selects the rotation grouping.</td>
+<td>Followed by <code>LABEL</code> or <code>BLOCK</code>.</td>
+</tr>
+<tr>
+<td><code>LABEL</code></td>
+<td>Rotate between label groups.</td>
+<td><code>ROUND ROBIN BY LABEL</code>.</td>
+</tr>
+<tr>
+<td><code>BLOCK</code></td>
+<td>Rotate between individual blocks.</td>
+<td><code>ROUND ROBIN BY BLOCK</code>.</td>
+</tr>
+<tr>
+<td><code>SIDE</code></td>
+<td>Ends a side selector.</td>
+<td><code>TOP SIDE</code>, <code>TOP, WEST SIDE</code>, <code>EACH SIDE</code>.</td>
+</tr>
+<tr>
+<td><code>TOP</code>, <code>BOTTOM</code></td>
+<td>Absolute up/down faces.</td>
+<td><code>TOP SIDE</code>.</td>
+</tr>
+<tr>
+<td><code>NORTH</code>, <code>EAST</code>, <code>SOUTH</code>, <code>WEST</code></td>
+<td>Absolute horizontal faces.</td>
+<td><code>NORTH SIDE</code>.</td>
+</tr>
+<tr>
+<td><code>FRONT</code>, <code>BACK</code>, <code>LEFT</code>, <code>RIGHT</code></td>
+<td>Faces relative to the block's facing.</td>
+<td>See the exact mapping in section 11.</td>
+</tr>
+<tr>
+<td><code>NULL</code></td>
+<td>Unsided access.</td>
+<td><code>NULL SIDE</code>; also the default.</td>
+</tr>
+<tr>
+<td><code>WHERE</code></td>
+<td>Reserved lexer token, with no supported statement production in 4.34.0.</td>
+<td>Do not use as a filter keyword.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="punctuation-reference">Punctuation reference</h3>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--</code></td>
+<td>End-of-line comment.</td>
+</tr>
+<tr>
+<td><code>&quot;…&quot;</code></td>
+<td>Quoted title, label, or resource filter.</td>
+</tr>
+<tr>
+<td><code>,</code></td>
+<td>List separator.</td>
+</tr>
+<tr>
+<td><code>:</code></td>
+<td>Separates resource ID/type or tag namespace components.</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Wildcard in unquoted resource/tag patterns.</td>
+</tr>
+<tr>
+<td><code>#</code></td>
+<td>Tag introducer.</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Tag path separator; quote ordinary resource paths that require it.</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Inclusive slot range, as in <code>0-8</code>. Not subtraction.</td>
+</tr>
+<tr>
+<td><code>(</code>, <code>)</code></td>
+<td>Groups boolean/tag expressions; also regex syntax inside a quoted resource filter.</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>Timer phase offset.</td>
+</tr>
+</tbody>
+</table>
+<p>There are no <code>SET</code>, <code>VAR</code>, <code>LET</code>, <code>FUNCTION</code>, <code>RETURN</code>, <code>IMPORT</code>, <code>WAIT</code>, <code>CRAFT</code>, <code>FOR</code>, <code>FOREACH</code>, or <code>WHILE</code> statements in this release. <code>EACH</code> is a modifier, not a loop body. The keyword inventory is checked against the <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/antlr/sfml/SFML.g4">exact lexer grammar</a>.</p>
+</section><section class="chapter" data-title="16. Ready-to-edit examples"><h2 id="16-ready-to-edit-examples">16. Ready-to-edit examples</h2>
+<p>Each file is a complete separate program. Match its label names to your network before use. Avoid running two scripts against the same inventories until you understand their combined behavior.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+<th>Labels to assign</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="examples/01-first-transfer.sfml">01-first-transfer.sfml</a></td>
+<td>Move items between two chests.</td>
+<td><code>source</code>, <code>destination</code></td>
+</tr>
+<tr>
+<td><a href="examples/02-priority-and-overflow.sfml">02-priority-and-overflow.sfml</a></td>
+<td>Keep workshop iron stocked, then warehouse overflow.</td>
+<td><code>incoming</code>, <code>workshop</code>, <code>warehouse</code></td>
+</tr>
+<tr>
+<td><a href="examples/03-reserve-and-restock.sfml">03-reserve-and-restock.sfml</a></td>
+<td>Preserve source coal and refill each generator.</td>
+<td><code>coal_stock</code>, <code>generators</code></td>
+</tr>
+<tr>
+<td><a href="examples/04-furnace-line.sfml">04-furnace-line.sfml</a></td>
+<td>Feed raw iron/fuel and collect ingots from furnaces.</td>
+<td><code>ores</code>, <code>fuel</code>, <code>furnaces</code>, <code>finished</code></td>
+</tr>
+<tr>
+<td><a href="examples/05-fluid-top-up.sfml">05-fluid-top-up.sfml</a></td>
+<td>Keep up to one bucket of water in each destination tank.</td>
+<td><code>water_source</code>, <code>water_tanks</code></td>
+</tr>
+<tr>
+<td><a href="examples/06-fe-distribution.sfml">06-fe-distribution.sfml</a></td>
+<td>Send capped FE to each machine every tick.</td>
+<td><code>battery</code>, <code>machines</code></td>
+</tr>
+<tr>
+<td><a href="examples/07-chemical-transfer.sfml">07-chemical-transfer.sfml</a></td>
+<td>Move Mekanism oxygen through configured machine faces.</td>
+<td><code>oxygen_source</code>, <code>oxygen_users</code></td>
+</tr>
+<tr>
+<td><a href="examples/08-tag-sorter.sfml">08-tag-sorter.sfml</a></td>
+<td>Route tagged ingots first, then remaining items.</td>
+<td><code>incoming</code>, <code>ingot_storage</code>, <code>other_storage</code></td>
+</tr>
+<tr>
+<td><a href="examples/09-lever-enabled.sfml">09-lever-enabled.sfml</a></td>
+<td>Transfer only while the manager receives power.</td>
+<td><code>source</code>, <code>destination</code></td>
+</tr>
+<tr>
+<td><a href="examples/10-pulse-batch.sfml">10-pulse-batch.sfml</a></td>
+<td>Move up to 16 cobblestone per redstone pulse.</td>
+<td><code>source</code>, <code>destination</code></td>
+</tr>
+<tr>
+<td><a href="examples/11-round-robin.sfml">11-round-robin.sfml</a></td>
+<td>Give individual stations alternating deliveries.</td>
+<td><code>warehouse</code>, <code>stations</code></td>
+</tr>
+<tr>
+<td><a href="examples/12-slot-routing.sfml">12-slot-routing.sfml</a></td>
+<td>Move between selected rows of ordinary chests.</td>
+<td><code>cabinet</code>, <code>sorting_chest</code></td>
+</tr>
+<tr>
+<td><a href="examples/13-conditional-restocking.sfml">13-conditional-restocking.sfml</a></td>
+<td>Refill low stock and return excess stock.</td>
+<td><code>supplies</code>, <code>warehouse</code></td>
+</tr>
+<tr>
+<td><a href="examples/14-independent-jobs.sfml">14-independent-jobs.sfml</a></td>
+<td>Keep two routes separate with FORGET.</td>
+<td><code>mined_items</code>, <code>ore_storage</code>, <code>harvested_crops</code>, <code>food_storage</code></td>
+</tr>
+<tr>
+<td><a href="examples/15-resource-and-block-each.sfml">15-resource-and-block-each.sfml</a></td>
+<td>Maintain each ingot type separately in each supply chest.</td>
+<td><code>warehouse</code>, <code>workbenches</code></td>
+</tr>
+<tr>
+<td><a href="examples/16-empty-slot-insertion.sfml">16-empty-slot-insertion.sfml</a></td>
+<td>Insert only into empty destination slots.</td>
+<td><code>drops</code>, <code>storage</code></td>
+</tr>
+</tbody>
+</table>
+<p>The exact source/destination machine interfaces remain your responsibility: a syntactically valid script cannot turn an output-only port into an input port. These examples intentionally do not assume an entire production recipe, universal slot numbering, or unlimited throughput.</p>
+</section><section class="chapter" data-title="17. Working with other mods"><h2 id="17-working-with-other-mods">17. Working with other mods</h2>
+<p>These integrations are optional. The corresponding mod must be installed, and its blocks must expose a compatible resource handler. Core SFML examples using ordinary chests and furnaces require none of these integrations.</p>
+<h3 id="mekanism-factories-and-chemical-lines">Mekanism factories and chemical lines</h3>
+<p>Select the correct resource type independently for items, FE, fluids, and chemicals. Configure the relevant <strong>resource category</strong> on each machine side. SFM's <code>INPUT</code> extracts from the machine's <strong>output</strong> face; SFM's <code>OUTPUT</code> inserts into the machine's <strong>input</strong> face. If possible, inspect the machine and use the suggested sides. Mekanism's item auto-sort feature is a separate machine setting; <code>TO EACH factories</code> distributes by block, not by processing lane.</p>
+<p>An oxygen routing example is included, with <code>EAST SIDE</code> and <code>WEST SIDE</code> as explicit example faces. Change the machine settings or those directions to match your build. The <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/compat/SFMMekanismCompat.java">Mekanism compatibility code</a> includes side inspection and chemical registration.</p>
+<h3 id="create-processing">Create processing</h3>
+<p>SFM routes resources to compatible inventories/tanks. It does not execute a <code>CRAFT</code> instruction, supply rotational power, or simulate the machine's recipe. The actual machine must perform its processing. Slots and sides can differ between a depot, basin, chest, and another mod's processing block.</p>
+<h3 id="storage-drawers-ae2-and-refined-storage">Storage drawers, AE2, and Refined Storage</h3>
+<p>Target an appropriate exposed inventory/interface block and confirm its behavior with a small item sample. A visible storage GUI is not proof that every network item is exposed through that block's external item handler. Filtering and retention count what the selected handler exposes. Pattern-based autocrafting and SFM routing are separate mechanisms.</p>
+<h3 id="visual-editors-and-generated-scripts">Visual editors and generated scripts</h3>
+<p>If a visual editor generates SFML, inspect the resulting program when diagnosing a problem. An editor may expose only part of the language or target a different release. SFM's own parser and problems view are the version-specific authority for whether that program is accepted.</p>
+<h3 id="moving-or-rebuilding-machines">Moving or rebuilding machines</h3>
+<p>When blocks are moved, replaced, or assembled by another mod, recheck the manager's label assignments, cable connectivity, and the machines' exposed resource handlers. Test a small transfer after the change before relying on a complete factory. Moving-structure support depends on the participating mods and is not established by SFML syntax alone.</p>
+</section><section class="chapter" data-title="18. Troubleshooting"><h2 id="18-troubleshooting">18. Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>What to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Program will not compile</td>
+<td>Missing <code>END</code>, missing <code>DO</code>/<code>THEN</code>, <code>==</code> instead of <code>=</code>, unquoted reserved labels, wrong modifier order, or unsupported keywords.</td>
+</tr>
+<tr>
+<td>Minimum trigger interval error</td>
+<td>Use at least the configured interval; separate FE-only I/O into its own trigger.</td>
+</tr>
+<tr>
+<td>Program runs but moves nothing</td>
+<td>Labels pushed to the correct manager, cable network, loaded chunks, compatible handlers, source contents, and destination capacity.</td>
+</tr>
+<tr>
+<td>Items work but water/energy does not</td>
+<td>Explicit resource type on both INPUT and OUTPUT: <code>fluid::</code>, <code>fe::</code>, or <code>chemical::</code>.</td>
+</tr>
+<tr>
+<td>Wrong items end up in a machine</td>
+<td>A broad input/output filter, source inputs left active, overlapping labels, or missing <code>FORGET</code>.</td>
+</tr>
+<tr>
+<td>Only one machine gets resources</td>
+<td>A shared quantity cap, full destinations, source shortages, or round robin. Use block-level <code>EACH</code> where appropriate.</td>
+</tr>
+<tr>
+<td>Machine keeps accumulating more fuel</td>
+<td><code>OUTPUT 16</code> adds another batch every run. <code>OUTPUT RETAIN 16</code> maintains a target.</td>
+</tr>
+<tr>
+<td>Matching stock is not being counted as expected</td>
+<td>Resource namespace, tags, selected sides/slots, hidden machine compartments, and overlapping label groups.</td>
+</tr>
+<tr>
+<td>Filter matches no ore/ingot</td>
+<td>Registry ID differs from display name, tag not present, or a tag namespace from a different Minecraft version was copied into the program.</td>
+</tr>
+<tr>
+<td>Chemical transfer fails</td>
+<td>Fluid versus chemical type, exact chemical ID, appropriate resource-category side settings, and actual external tank access.</td>
+</tr>
+<tr>
+<td>A lever-off program still runs</td>
+<td>Check for bare <code>IF REDSTONE</code>; use <code>IF REDSTONE GT 0</code>.</td>
+</tr>
+<tr>
+<td>A timed job never runs</td>
+<td>An offset outside the interval, unloaded manager, compilation problems, or program execution disabled by server settings.</td>
+</tr>
+<tr>
+<td>A group test is unexpectedly true</td>
+<td>Missing labels can leave an empty group; <code>EVERY</code>/<code>LONE</code> may still be true.</td>
+</tr>
+<tr>
+<td>Old network stopped updating</td>
+<td>Check SFM's “Rebuild cable network” control after confirming physical connectivity.</td>
+</tr>
+<tr>
+<td>A composter accepts unexpected items</td>
+<td>Specify a valid insertion side; the built-in known-issues example warns that unsided insertion can behave like a trash can in affected versions.</td>
+</tr>
+</tbody>
+</table>
+<p>The cable-cache and composter notes come from the release's <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs/known_issues.sfml">known-issues example</a>. Use the smallest network that reproduces a problem, then add one rule at a time. Log/inspection tools help distinguish a parser error from a label, filter, or external-machine issue.</p>
+<h3 id="a-safe-way-to-develop-a-program">A safe way to develop a program</h3>
+<ol>
+<li>Prove an unfiltered chest-to-chest transfer works.</li>
+<li>Add one exact item filter.</li>
+<li>Add the real machine with one explicit side.</li>
+<li>Add stock targets and per-block <code>EACH</code> if needed.</li>
+<li>Separate additional jobs with <code>FORGET</code> or independent triggers.</li>
+<li>Test low source stock, a full destination, and a temporarily unavailable machine.</li>
+<li>Check that routing remains sensible after the relevant chunks unload/reload.</li>
+</ol>
+</section><section class="chapter" data-title="19. Quick reference"><h2 id="19-quick-reference">19. Quick reference</h2>
+<pre><code class="language-text">PROGRAM
+  NAME &quot;Optional title&quot;
+  EVERY 20 TICKS DO
+      statements
+  END
+
+TRANSFER
+  INPUT  [amount [EACH]] [RETAIN amount [EACH]] [resource filter]
+         [WITH tag expression] [EXCEPT resources] FROM [EACH] labels
+  OUTPUT [amount [EACH]] [RETAIN amount [EACH]] [resource filter]
+         [WITH tag expression] [EXCEPT resources] TO [EACH] labels
+
+AFTER LABELS, IN THIS ORDER
+  [ROUND ROBIN BY BLOCK | ROUND ROBIN BY LABEL]
+  [TOP SIDE | other side selector]
+  [SLOTS 0, 2-5]
+
+CONDITIONAL
+  IF [OVERALL | SOME | EVERY | EACH | ONE | LONE]
+     labels HAS comparison amount resource THEN
+      statements
+  ELSE IF another condition THEN
+      statements
+  ELSE
+      statements
+  END
+
+REMEMBER
+  INPUT = eligible sources; OUTPUT = actual transfer attempt
+  INPUT RETAIN = preserve source reserve
+  OUTPUT RETAIN = top up destination stock
+  8 EACH resource = per resource ID
+  TO EACH label = per block
+  FORGET = clear active source references
+  fe:: / fluid:: / chemical:: = explicit resource types
+  -- = comment; # = tag
+</code></pre>
+<p>This is notation, not a complete pasteable program. Download a file from section 16 when you want a starting script.</p>
+</section><section class="chapter" data-title="20. Sources and validation"><h2 id="20-sources-and-validation">20. Sources and validation</h2>
+<p>Primary references are pinned to the SFM 4.34.0 release used for validation. The manual is original explanatory material, not a replacement for the mod author's source or issue tracker.</p>
+<ul>
+<li>Release: <a href="https://github.com/TeamDman/SuperFactoryManager/tree/4.34.0-1.21.1">4.34.0-1.21.1</a>.</li>
+<li>Parser grammar: <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/platform/minecraft/src/main/antlr/sfml/SFML.g4">SFML.g4</a>.</li>
+<li>Author's built-in examples: <a href="https://github.com/TeamDman/SuperFactoryManager/tree/4.34.0-1.21.1/platform/minecraft/src/main/resources/assets/sfm/template_programs">template programs</a>.</li>
+<li>Language implementation: <a href="https://github.com/TeamDman/SuperFactoryManager/tree/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfml/ast">AST nodes</a>.</li>
+<li>Transfer accounting: <a href="https://github.com/TeamDman/SuperFactoryManager/tree/4.34.0-1.21.1/platform/minecraft/src/main/java/ca/teamdman/sfm/common/program">program trackers</a>.</li>
+<li>Mod source is licensed under <a href="https://github.com/TeamDman/SuperFactoryManager/blob/4.34.0-1.21.1/LICENSE.txt">MPL-2.0</a>.</li>
+</ul>
+<p>The companion <a href="VALIDATION.md">VALIDATION.md</a> records how the example syntax and documentation were checked. Parser acceptance does not prove live inventory behavior, machine configuration, network reachability, or moving-vehicle integration. Implementation caveats above are identified as source findings where they were not reproduced in-game.</p>
+</section><footer>AI-generated independent guide · SFM 4.34. Prepared September 13, 2026. Works offline; no external scripts, fonts, or analytics. <a href="README.md">Package information</a> · <a href="VALIDATION.md">Validation details</a></footer></main><script>
+const qs=s=>document.querySelector(s), all=s=>[...document.querySelectorAll(s)];
+const chapters=all('.chapter'), navlinks=all('nav a');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const words='NAME EVERY DO END INPUT FROM OUTPUT TO RETAIN EACH EXCEPT FORGET EMPTY SLOTS SLOT IN WITH WITHOUT TAG IF THEN ELSE HAS OVERALL SOME ONE LONE TRUE FALSE NOT AND OR GT LT EQ GE LE ROUND ROBIN BY LABEL BLOCK SIDE TOP BOTTOM NORTH EAST SOUTH WEST FRONT BACK LEFT RIGHT NULL TICK TICKS SECOND SECONDS GLOBAL G PLUS REDSTONE PULSE'.split(' '), keywords=new Set(words);
+all('pre').forEach(pre=>{
+ const code=pre.querySelector('code'), original=code.textContent, isProgram=code.classList.contains('language-sfml');
+ if(isProgram){let out='',end=0;const tokens=/--[^\r\n]*|"(?:\\.|[^"\\])*"|\b[A-Za-z_]+\b|\b[0-9]+\b/g;let m;while((m=tokens.exec(original))){out+=esc(original.slice(end,m.index));let v=m[0],cls=v.startsWith('--')?'comment':v.startsWith('"')?'str':keywords.has(v.toUpperCase())?'kw':/^\d+$/.test(v)?'num':'';out+=cls?'<span class="'+cls+'">'+esc(v)+'</span>':esc(v);end=tokens.lastIndex}out+=esc(original.slice(end));code.innerHTML=out}
+ const kind=document.createElement('span');kind.className='codekind';kind.textContent=isProgram?'SFML · complete program':'Reference notation';pre.prepend(kind);
+ const btn=document.createElement('button');btn.className='copy';btn.type='button';btn.textContent='Copy';btn.setAttribute('aria-label',isProgram?'Copy SFML program':'Copy reference notation');
+ btn.addEventListener('click',async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(original)}else{const t=document.createElement('textarea');t.value=original;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();if(!document.execCommand('copy'))throw new Error('Copy unavailable');t.remove()}btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',1500)}catch(e){btn.textContent='Select and copy';const sel=window.getSelection(),range=document.createRange();range.selectNodeContents(code);sel.removeAllRanges();sel.addRange(range)}});pre.append(btn)
+});
+all('table').forEach(t=>{let wrap=document.createElement('div');wrap.className='table-scroll';t.parentNode.insertBefore(wrap,t);wrap.append(t)});
+const entries=chapters.map((node,i)=>({node,link:navlinks[i],text:node.textContent.toLowerCase()}));
+function filter(){const terms=qs('#search').value.toLowerCase().trim().split(/\s+/).filter(Boolean);let count=0;entries.forEach(e=>{const show=terms.every(t=>e.text.includes(t));e.node.hidden=!show;e.link.hidden=!show;if(show)count++});qs('#status').hidden=!terms.length;qs('#result').textContent=count+' of '+entries.length+' chapters match';qs('.intro').hidden=terms.length>0}
+qs('#search').addEventListener('input',filter);qs('#clear').addEventListener('click',()=>{qs('#search').value='';filter();qs('#search').focus()});
+function revealHash(){const id=decodeURIComponent(location.hash.slice(1)),target=document.getElementById(id);if(target&&target.closest('.chapter')?.hidden){qs('#search').value='';filter();target.scrollIntoView()}}
+window.addEventListener('hashchange',revealHash);revealHash();
+qs('#theme').addEventListener('click',()=>{const dark=document.documentElement.classList.toggle('dark');qs('#theme').textContent=dark?'Light theme':'Dark theme';try{localStorage.setItem('sfml-docs-theme',dark?'dark':'light')}catch(e){}});
+try{if(localStorage.getItem('sfml-docs-theme')==='dark'){document.documentElement.classList.add('dark');qs('#theme').textContent='Light theme'}}catch(e){}
+qs('#print').addEventListener('click',()=>window.print());qs('#navtoggle').addEventListener('click',()=>{let open=qs('aside').classList.toggle('open');qs('#navtoggle').setAttribute('aria-expanded',String(open))});
+window.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();qs('#search').focus()}if(e.key==='Escape'&&document.activeElement===qs('#search')){qs('#search').value='';filter();qs('#search').blur()}});
+if('IntersectionObserver'in window){const obs=new IntersectionObserver(list=>{list.forEach(x=>{if(x.isIntersecting){navlinks.forEach(a=>a.classList.toggle('active',a.hash==='#'+x.target.id))}})},{rootMargin:'0px 0px -75% 0px'});all('.chapter h2').forEach(h=>obs.observe(h))}
+// An illustrative arithmetic model: one resource, one source, one destination.
+const retentionChapter=chapters.find(s=>s.dataset.title.startsWith('7.'));
+const lab=document.createElement('div');lab.className='lab';lab.innerHTML='<h3>Try an OUTPUT RETAIN calculation</h3><p>One item type and one destination; assumes sufficient capacity and no other transfer limits.</p><div class="lab-grid"><label>Available from source<input id="lab-source" type="number" min="0" step="1" value="100"></label><label>Already at destination<input id="lab-stock" type="number" min="0" step="1" value="50"></label><label>Quantity limit<input id="lab-limit" type="number" min="0" step="1" value="16"></label><label>RETAIN target<input id="lab-target" type="number" min="0" step="1" value="64"></label></div><output id="lab-output" aria-live="polite"></output><p id="lab-rule"></p><p>This is an explanatory calculator, not the SFM runtime.</p>';
+retentionChapter.querySelector('h3').before(lab);
+function calc(){const val=id=>Math.max(0,Math.floor(Number(qs('#lab-'+id).value)||0));const source=val('source'),stock=val('stock'),limit=val('limit'),target=val('target'),moved=Math.min(source,limit,Math.max(0,target-stock));qs('#lab-output').textContent=moved+' items may move → '+(stock+moved)+' at destination';qs('#lab-rule').textContent='OUTPUT '+limit+' RETAIN '+target+' minecraft:iron_ingot TO supply'}
+all('.lab input').forEach(i=>i.addEventListener('input',calc));calc();
+// Expose only read-only counts so offline UI checks can confirm enhancement completed.
+document.body.dataset.ready='true';document.body.dataset.chapters=String(chapters.length);
+</script></body></html>

@@ -1,0 +1,7 @@
+NAME "Cobblestone batch button"
+
+-- Each redstone pulse received by the manager allows up to 16 items.
+EVERY REDSTONE PULSE DO
+    INPUT 16 minecraft:cobblestone FROM source
+    OUTPUT TO destination
+END

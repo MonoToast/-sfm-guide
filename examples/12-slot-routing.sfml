@@ -1,0 +1,7 @@
+NAME "Chest row routing"
+
+-- Zero-based chest-handler indices; verify indices for other containers.
+EVERY 20 TICKS DO
+    INPUT FROM cabinet SLOTS 0-8
+    OUTPUT TO sorting_chest SLOTS 9-17
+END

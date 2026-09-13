@@ -1,0 +1,6 @@
+NAME "Alternating station supply"
+
+EVERY 20 TICKS DO
+    INPUT minecraft:stone FROM warehouse
+    OUTPUT 16 minecraft:stone TO stations ROUND ROBIN BY BLOCK
+END

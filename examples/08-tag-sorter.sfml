@@ -1,0 +1,9 @@
+NAME "Ingots before other storage"
+
+-- Verify that c:ingots contains the intended items in this installation.
+-- If ingot_storage is full, its remaining ingots can reach other_storage.
+EVERY 20 TICKS DO
+    INPUT FROM incoming
+    OUTPUT WITH #c:ingots TO ingot_storage
+    OUTPUT TO other_storage
+END

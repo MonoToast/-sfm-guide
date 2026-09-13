@@ -1,0 +1,9 @@
+NAME "Lever-enabled transfer"
+
+-- The manager itself must receive the lever signal.
+EVERY 20 TICKS DO
+    IF REDSTONE GT 0 THEN
+        INPUT FROM source
+        OUTPUT TO destination
+    END
+END

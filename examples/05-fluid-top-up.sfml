@@ -1,0 +1,7 @@
+NAME "One bucket of water per tank"
+
+-- 1000 mB = one bucket; configure fluid sides if required.
+EVERY 20 TICKS DO
+    INPUT fluid:minecraft:water FROM water_source
+    OUTPUT RETAIN 1000 fluid:minecraft:water TO EACH water_tanks
+END

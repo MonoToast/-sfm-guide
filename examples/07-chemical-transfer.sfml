@@ -1,0 +1,8 @@
+NAME "Mekanism oxygen line"
+
+-- Example faces: source outputs chemical to EAST, users accept from WEST.
+-- Change these directions or machine settings to match your build.
+EVERY 20 TICKS DO
+    INPUT chemical:mekanism:oxygen FROM oxygen_source EAST SIDE
+    OUTPUT RETAIN 1000 chemical:mekanism:oxygen TO EACH oxygen_users WEST SIDE
+END

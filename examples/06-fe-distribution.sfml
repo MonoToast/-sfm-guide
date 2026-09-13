@@ -1,0 +1,8 @@
+NAME "Capped FE delivery"
+
+-- FE-only trigger; source/destination capabilities still limit throughput.
+-- Each machine may receive up to 10000 FE per trigger execution.
+EVERY TICK DO
+    INPUT fe:: FROM battery
+    OUTPUT 10000 fe:: TO EACH machines
+END

@@ -1,0 +1,7 @@
+NAME "Maintain iron and gold at every workbench"
+
+-- workbenches means ordinary supply chests, not crafting-table blocks.
+EVERY 20 TICKS DO
+    INPUT minecraft:iron_ingot OR minecraft:gold_ingot FROM warehouse
+    OUTPUT RETAIN 16 EACH minecraft:iron_ingot OR minecraft:gold_ingot TO EACH workbenches
+END
